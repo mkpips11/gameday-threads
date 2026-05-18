@@ -157,7 +157,7 @@
   .step-pill.active .num { background: var(--gold); color: var(--ink); }
   .step-pill.active .label { color: white; }
   .step-line { width: 18px; height: 1px; background: var(--border); }
-  .step-nav { padding-top: 24px; display: flex; justify-content: flex-end; }
+  .step-nav { padding-top: 24px; display: none; justify-content: flex-end; }
   .btn-next {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 12px 24px; background: var(--purple); color: white;
@@ -1224,7 +1224,7 @@
       var el = document.getElementById('step-section-' + s);
       if (el) el.style.display = (s === n) ? '' : 'none';
       var nav = document.getElementById('step-nav-' + s);
-      if (nav) nav.style.display = (s === n) ? '' : 'none';
+      if (nav) nav.style.display = (s === n) ? 'flex' : 'none';
     }
     // Show submit only on step 5
     var submitEl = document.querySelector('.submit-area');
