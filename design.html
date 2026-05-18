@@ -855,7 +855,7 @@
         </div>
       </div>
 
-      <div class="step-nav"><button class="btn-next" onclick="showStep(2)">Next: Pick Colors <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
+      <div class="step-nav" id="step-nav-1"><button class="btn-next" onclick="showStep(2)">Next: Pick Colors <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
       </div>
       <!-- STEP 2: COLORS -->
       <div class="form-section" id="step-section-2">
@@ -979,7 +979,7 @@
         </div>
       </div>
 
-      <div class="step-nav"><button class="btn-next" onclick="showStep(3)">Next: Share Your Design <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
+      <div class="step-nav" id="step-nav-2"><button class="btn-next" onclick="showStep(3)">Next: Share Your Design <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
       </div>
       <!-- STEP 3: DESIGN -->
       <div class="form-section" id="step-section-3">
@@ -1013,7 +1013,7 @@
         </div>
       </div>
 
-      <div class="step-nav"><button class="btn-next" onclick="showStep(4)">Next: Add Extras <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
+      <div class="step-nav" id="step-nav-3"><button class="btn-next" onclick="showStep(4)">Next: Add Extras <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
       </div>
       <!-- STEP 4: EXTRAS -->
       <div class="form-section" id="step-section-4">
@@ -1075,7 +1075,7 @@
         </div>
       </div>
 
-      <div class="step-nav"><button class="btn-next" onclick="showStep(5)">Next: Your Info <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
+      <div class="step-nav" id="step-nav-4"><button class="btn-next" onclick="showStep(5)">Next: Your Info <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
       </div>
       <!-- STEP 5: CONTACT -->
       <div class="form-section" id="step-section-5">
@@ -1219,10 +1219,12 @@
       pill.classList.toggle('active', i + 1 === n);
       pill.classList.toggle('done', i + 1 < n);
     });
-    // Show/hide sections
+    // Show/hide sections and their nav buttons
     for (var s = 1; s <= totalSteps; s++) {
       var el = document.getElementById('step-section-' + s);
       if (el) el.style.display = (s === n) ? '' : 'none';
+      var nav = document.getElementById('step-nav-' + s);
+      if (nav) nav.style.display = (s === n) ? '' : 'none';
     }
     // Show submit only on step 5
     var submitEl = document.querySelector('.submit-area');
