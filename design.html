@@ -157,6 +157,18 @@
   .step-pill.active .num { background: var(--gold); color: var(--ink); }
   .step-pill.active .label { color: white; }
   .step-line { width: 18px; height: 1px; background: var(--border); }
+  .step-nav { padding-top: 24px; display: flex; justify-content: flex-end; }
+  .btn-next {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; background: var(--purple); color: white;
+    border: none; border-radius: 100px; font-family: 'Inter'; font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-next:hover { background: var(--purple-deep); transform: translateY(-1px); }
+  .step-pill { cursor: pointer; }
+  .step-pill.done { background: var(--purple-bg); }
+  .step-pill.done .num { background: var(--success); color: white; }
+
 
   /* LAYOUT */
   .layout {
@@ -757,7 +769,7 @@
       <a href="design.html">Design Your Own</a>
       <a href="team-orders.html">Team &amp; Booster Orders</a>
       <a href="index.html#about">About</a>
-      <a href="mailto:[email protected]">Contact</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="mobile-toggle"><svg class="icon"><use href="#icon-menu-2"/></svg></button>
@@ -795,7 +807,7 @@
     <div class="form-col">
 
       <!-- STEP 1: PRODUCT -->
-      <div class="form-section">
+      <div class="form-section" id="step-section-1">
         <div class="section-num">
           <div class="circle">1</div>
           <h3>Choose your product</h3>
@@ -843,8 +855,10 @@
         </div>
       </div>
 
+      <div class="step-nav"><button class="btn-next" onclick="showStep(2)">Next: Pick Colors <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
+      </div>
       <!-- STEP 2: COLORS -->
-      <div class="form-section">
+      <div class="form-section" id="step-section-2">
         <div class="section-num">
           <div class="circle">2</div>
           <h3>Pick your colors</h3>
@@ -965,8 +979,10 @@
         </div>
       </div>
 
+      <div class="step-nav"><button class="btn-next" onclick="showStep(3)">Next: Share Your Design <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
+      </div>
       <!-- STEP 3: DESIGN -->
-      <div class="form-section">
+      <div class="form-section" id="step-section-3">
         <div class="section-num">
           <div class="circle">3</div>
           <h3>Share your design</h3>
@@ -997,8 +1013,10 @@
         </div>
       </div>
 
+      <div class="step-nav"><button class="btn-next" onclick="showStep(4)">Next: Add Extras <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
+      </div>
       <!-- STEP 4: EXTRAS -->
-      <div class="form-section">
+      <div class="form-section" id="step-section-4">
         <div class="section-num">
           <div class="circle">4</div>
           <h3>Add the little extras</h3>
@@ -1057,8 +1075,10 @@
         </div>
       </div>
 
+      <div class="step-nav"><button class="btn-next" onclick="showStep(5)">Next: Your Info <svg class="icon" style="width:14px;height:14px"><use href="#icon-arrow-right"/></svg></button></div>
+      </div>
       <!-- STEP 5: CONTACT -->
-      <div class="form-section">
+      <div class="form-section" id="step-section-5">
         <div class="section-num">
           <div class="circle">5</div>
           <h3>Your info</h3>
@@ -1185,6 +1205,45 @@
     © 2026 Game Day Threads · Made by hand in the Rio Grande Valley, with love.
   </div>
 </footer>
+
+
+<script>
+(function() {
+  var currentStep = 1;
+  var totalSteps = 5;
+
+  function showStep(n) {
+    currentStep = n;
+    // Update pills
+    document.querySelectorAll('.step-pill').forEach(function(pill, i) {
+      pill.classList.toggle('active', i + 1 === n);
+      pill.classList.toggle('done', i + 1 < n);
+    });
+    // Show/hide sections
+    for (var s = 1; s <= totalSteps; s++) {
+      var el = document.getElementById('step-section-' + s);
+      if (el) el.style.display = (s === n) ? '' : 'none';
+    }
+    // Show submit only on step 5
+    var submitEl = document.querySelector('.submit-area');
+    if (submitEl) submitEl.style.display = (n === totalSteps) ? '' : 'none';
+    // Scroll to top of form
+    var formCol = document.querySelector('.form-col');
+    if (formCol) formCol.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Make pills clickable
+  document.querySelectorAll('.step-pill').forEach(function(pill, i) {
+    pill.addEventListener('click', function() { showStep(i + 1); });
+  });
+
+  // Expose showStep globally for inline onclick handlers
+  window.showStep = showStep;
+
+  // Init: show step 1, hide others + submit
+  showStep(1);
+})();
+</script>
 
 </body>
 </html>

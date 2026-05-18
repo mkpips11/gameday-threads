@@ -58,6 +58,15 @@
     padding: 16px 0;
   }
   .header-row { display: flex; align-items: center; justify-content: space-between; }
+  nav.main {
+    display: flex; gap: 28px;
+    font-size: 14px; font-weight: 500;
+  }
+  nav.main a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+  nav.main a:hover { color: var(--purple); }
+  .header-actions { display: flex; align-items: center; gap: 16px; font-size: 19px; color: var(--text); }
+  .mobile-toggle { display: none; background: none; border: none; font-size: 22px; color: var(--text); cursor: pointer; }
+  @media(max-width:768px) { nav.main { display: none; } .mobile-toggle { display: block; } }
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
   .brand img { height: 72px; width: auto; }
   .brand-text .name {
@@ -445,7 +454,7 @@
       <a href="design.html">Design Your Own</a>
       <a href="team-orders.html">Team &amp; Booster Orders</a>
       <a href="index.html#about">About</a>
-      <a href="mailto:[email protected]">Contact</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
       <button class="mobile-toggle"><svg class="icon"><use href="#icon-menu-2"/></svg></button>
